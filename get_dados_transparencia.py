@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 driver = webdriver.Chrome()
 
 # Open the web page
-driver.get("https://transparencia.joaopessoa.pb.gov.br/#/dados-abertos")
+driver.get("https://transparencia.joaopessoa.pb.gov.br/#/dados-abertos/listagem/savings/Receitas%20e%20Despesas")
 
 # Find the element with "savings" written on it and click it
 try:
@@ -16,13 +16,15 @@ try:
     )
     savings_element.click()
     
+    WebDriverWait(driver,10)
+
     # Wait for the next page to load
     WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "card-body"))
+        EC.presence_of_element_located((By.CLASS_NAME, "dados-titulo"))
     )
     
     # Find the list of span elements and print out their text values
-    span_elements = driver.find_elements("class name","card-body")
+    span_elements = driver.find_elements("tag name","span")
     for span in span_elements:
         print(span.text)
     
